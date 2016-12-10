@@ -46,12 +46,3 @@ closest_centers <- function(coord, centers, dist = l2_distance) {
   dist_vec <- fun_vec_and_mat(coord, centers, dist)
   min(which(dist_vec == min(dist_vec)))
 }
-l2_distance <- function(v1, v2) {
-  mean((v1 - v2)^2)
-}
-
-
-fun_vec_and_mat <- function(v1, mat, FUN) {
-  row_seq <- seq(nrow(mat))
-  row_seq %>% purrr::map_dbl(~FUN(mat[.x, ], v1))
-}

@@ -25,6 +25,6 @@ compute_dist <- function(mat0, mat1, dist = l2_distance) {
   row_seq <- seq(nrow(mat0))
   purrr::map_dbl(
     .x = row_seq, 
-    .f = ~mat0[.x] %>% fun_vec_and_mat(centers, dist) %>% min()
+    .f = ~mat0[.x, ] %>% fun_vec_and_mat(mat1, dist) %>% min()
   )
 }
