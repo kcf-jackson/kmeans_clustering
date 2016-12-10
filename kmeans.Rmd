@@ -1,0 +1,37 @@
+---
+title: "k-means clustering experiments"
+output: html_notebook
+---
+
+Algorithm: k-means
+Task: clustering
+
+Background:
+
+Summary:
+Theory: No theoretical guanrantee. Can be arbitrarily worse.
+-> k-means++: O(log(k)) competitive with the optimal clustering.
+[k-means++: The Advantages of Careful Seeding(2007)](http://ilpubs.stanford.edu:8090/778/1/2006-13.pdf)
+
+Practice: Convenient to apply and fast convergence.
+
+Scalability: 
+- large n: 
+-> [Scalable K-Means++(2012)](http://vldb.org/pvldb/vol5/p622_bahmanbahmani_vldb2012.pdf)
+-> [Fast and Provably Good Seedings for k-Means(2016)](http://papers.nips.cc/paper/6478-fast-and-provably-good-seedings-for-k-means.pdf)
+- large p: naturally doesn't work due to the unusual geometry of high dimensional space.
+
+
+
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
