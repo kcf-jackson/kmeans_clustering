@@ -1,37 +1,31 @@
 ---
 title: "k-means clustering experiments"
-output: html_notebook
+output:
+  html_document: default
+  html_notebook: default
 ---
 
 Algorithm: k-means
 Task: clustering
 
-Background:
-
 Summary:
-Theory: No theoretical guanrantee. Can be arbitrarily worse.
--> k-means++: O(log(k)) competitive with the optimal clustering.
-[k-means++: The Advantages of Careful Seeding(2007)](http://ilpubs.stanford.edu:8090/778/1/2006-13.pdf)
+Formulation: Minimising $$R(c_1, ..., c_k) = 
+\dfrac 1 n \sum_{i=1}^n \min_j||Y_i - c_j||^2$$. NP-hard problem even for two clusters.
+
+Estimation: Lloyd's algorithm. Computational complexity $O(nkdi)$, where $n$ is the number of data, $k$ is the number of clusters, $d$ is the dimensions of theh data and $i$ is the number of iterations to convergence.
 
 Practice: Convenient to apply and fast convergence.
 
-Scalability: 
-- large n: 
+Theory: No theoretical guanrantee. Can be arbitrarily worse.
+-> k-means++: $O(log(k))$ competitive with the optimal clustering.
+[k-means++: The Advantages of Careful Seeding(2007)](http://ilpubs.stanford.edu:8090/778/1/2006-13.pdf)
+-> Require k passes of the full data(each pass is used to compute the exact sampling distribution), so it doesn't scale with n.
 -> [Scalable K-Means++(2012)](http://vldb.org/pvldb/vol5/p622_bahmanbahmani_vldb2012.pdf)
+-> [Approximate k-means++
+in sublinear time(2016)](http://people.inf.ethz.ch/~shassani/papers/kmeans-aaai16.pdf) uses MCMC to avoid the update of the sampling distribution
 -> [Fast and Provably Good Seedings for k-Means(2016)](http://papers.nips.cc/paper/6478-fast-and-provably-good-seedings-for-k-means.pdf)
-- large p: naturally doesn't work due to the unusual geometry of high dimensional space.
+[A survey of k-means initialisation(2013)](https://arxiv.org/pdf/1209.1960.pdf) with experiments of 32 real datasets.
 
-
-
-
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
-
-```{r}
-plot(cars)
-```
-
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
-
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+Scalability: 
+- large n: stochastic nearest neighbor.
+- large p: fundamentally doesn't work due to the unusual geometry of high dimensional space. Need to sidestep with dimension reduction techniques.
