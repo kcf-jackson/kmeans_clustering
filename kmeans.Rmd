@@ -1,0 +1,39 @@
+---
+title: "k-means clustering experiments"
+output:
+  html_document: default
+  html_notebook: default
+---
+
+#### Algorithm: k-means
+
+#### Task: clustering
+
+#### Summary
+- Formulation: Minimising 
+$$R(c_1, ..., c_k) = \dfrac 1 n \sum_{i=1}^n \min_j||Y_i - c_j||^2.$$
+NP-hard problem even for two clusters.
+
+- Estimation: Lloyd's algorithm. Computational complexity $O(nkdi)$, where $n$ is the number of data, $k$ is the number of clusters, $d$ is the dimensions of theh data and $i$ is the number of iterations to convergence.
+
+- Practice: Convenient to apply and fast convergence.
+
+- Theory: No theoretical guanrantee. Can be arbitrarily worse.
+
+    -> [k-means++: The Advantages of Careful Seeding(2007)](http://ilpubs.stanford.edu:8090/778/1/2006-13.pdf)  
+    Pros: $O(log(k))$ competitive with the optimal clustering.  
+    Cons: It require k passes of the full data(each pass is used to compute the exact sampling distribution), so it doesn't scale with n.
+
+    -> [Scalable K-Means++(2012)](http://vldb.org/pvldb/vol5/p622_bahmanbahmani_vldb2012.pdf)
+
+    -> [Approximate k-means++
+in sublinear time(2016)](http://people.inf.ethz.ch/~shassani/papers/kmeans-aaai16.pdf) uses MCMC to avoid the update of the sampling distribution
+
+    -> [Fast and Provably Good Seedings for k-Means(2016)](http://papers.nips.cc/paper/6478-fast-and-provably-good-seedings-for-k-means.pdf) gives an assumption-free algorithm for initialising the algorithm "kmean++" and proves competitiveness with the optimal clustering.
+    
+    (An useful reference for setting up simulation studies: [A survey of k-means initialisation(2013)](https://arxiv.org/pdf/1209.1960.pdf) with experiments of 32 real datasets.)
+
+- Scalability
+
+    - large n: stochastic nearest neighbor.
+    - large p: fundamentally doesn't work due to the unusual geometry of high dimensional space. Need to sidestep with dimension reduction techniques.
